@@ -1,0 +1,78 @@
+{% extends 'base.html'%} {% block content %}
+
+<div class="container mt-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{% url 'expenses'%}">Expenses</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Add Expenses</li>
+    </ol>
+  </nav>
+
+  <div class="card">
+    <div class="card-body">
+      <form action="{% url 'add-expenses'%}" method="post">
+        {% include 'partials/_messages.html'%} {% csrf_token %}
+
+        <div class="form-group">
+          <label for="">Amount</label>
+          <input
+            type="text"
+            name="amount"
+            id=""
+            class="form-control form-control-sm"
+            placeholder=""
+            aria-describedby="helpId"
+            value="{{values.amount}}"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="">Description</label>
+          <input
+            type="text"
+            name="description"
+            id=""
+            class="form-control form-control-sm"
+            placeholder=""
+            aria-describedby="helpId"
+            value="{{values.description}}"
+
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="">Category</label>
+          <select class="form-control" name="category">
+            {% for category in categories%}
+            <option name="category" value="{{ category.name }}">
+              {{ category.name }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="">Date of Expenses</label>
+          <input
+            type="date"
+            name="expenses_date"
+            id=""
+            class="form-control form-control-sm"
+            placeholder=""
+            aria-describedby="helpId"
+          />
+        </div>
+
+        <input
+          type="submit"
+          value="Submit"
+          class="btn btn-primary btn-primary-sm"
+        />
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
